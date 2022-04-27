@@ -4,6 +4,7 @@ from logging import Formatter, Handler, Logger
 from pathlib import Path
 from typing import Callable, Coroutine, ParamSpec, TypeVar
 
+from rich.console import Console
 from rich.logging import RichHandler
 from rich.traceback import install
 from rich.console import Console
@@ -20,7 +21,7 @@ def setup_logger(*, set_root: bool = False, save: bool = False, level: str = "IN
     if save:
         path = Path(f"./logs/{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
         path.parent.mkdir(parents=True, exist_ok=True)
-        file = open(path, mode='w', encoding='utf-8')
+        file = open(path, mode="w", encoding="utf-8")
         console = Console(file=file)
         handler = RichHandler(rich_tracebacks=True, markup=True, console=console)
         handler.setFormatter(formatter)
