@@ -86,6 +86,8 @@ async def poll_msg(ws: WebSocket, q: asyncio.Queue[str], key: str) -> None:
             await ws.send_json(jsonable_encoder(state))
         except asyncio.CancelledError:
             break
+        except ConnectionClosedOK:
+            break
         except BaseException as e:
             logger.error(f"Error in poll_msg: {e}")
 
